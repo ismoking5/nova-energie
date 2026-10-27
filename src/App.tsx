@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
-import { Bell, CheckCircle2, ChevronRight, CircleAlert, CreditCard, Eye, Home, MessageSquareText, Package2, Search, ShieldCheck, Telegram, UserCircle2, Wallet, ArrowDownToLine, ArrowUpFromLine, LogOut, Menu, X } from 'lucide-react';
+import { Bell, CheckCircle2, ChevronRight, CircleAlert, CreditCard, Eye, Home, MessageSquareText, Package2, Search, ShieldCheck, Send, UserCircle2, Wallet, ArrowDownToLine, ArrowUpFromLine, LogOut, Menu, X } from 'lucide-react';
 import { appSettings, products, profile, wallet, notifications, depositRequests, withdrawalRequests, referrals, formatCurrency, formatDate } from './data/mockData';
 import { Product } from './types';
 
@@ -209,9 +209,9 @@ function App() {
                   <option value="">Sélectionnez votre pays</option>
                   {appSettings.allowedCountries.map((country) => <option key={country} value={country}>{countryLabels[country]}</option>)}
                 </select>
-                <input className="w-full rounded-xl border border-slate-200 px-4 py-3" value={authForm.phone} onChange={(e) => setAuthForm({ ...authForm, phone: e.target.value })} placeholder="Numéro de téléphone" />
+                <input className="w-full rounded-xl border border-slate-200 px-4 py-3" value={authForm.phone} onChange={(e) => setAuthForm({ ...authForm, phone: e.target.value })} placeholder="Téléphone" />
                 <input type="password" className="w-full rounded-xl border border-slate-200 px-4 py-3" value={authForm.password} onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })} placeholder="Mot de passe" />
-                <input className="w-full rounded-xl border border-slate-200 px-4 py-3" value={authForm.sponsor} onChange={(e) => setAuthForm({ ...authForm, sponsor: e.target.value })} placeholder="Code de parrainage (facultatif)" />
+                <input className="w-full rounded-xl border border-slate-200 px-4 py-3" value={authForm.sponsor} onChange={(e) => setAuthForm({ ...authForm, sponsor: e.target.value })} placeholder="Code parrain (facultatif)" />
                 <button type="submit" className="w-full rounded-xl bg-energy px-4 py-3 font-bold text-white">S’inscrire</button>
               </form>
 
@@ -257,7 +257,7 @@ function App() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <button onClick={() => setShowInfo(false)} className="flex-1 rounded-xl bg-night px-4 py-3 font-bold text-white">D’accord</button>
               <a href={appSettings.telegramLink} target="_blank" rel="noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-sky-500 px-4 py-3 font-bold text-white">
-                <Telegram size={18} /> Rejoindre Telegram
+                <Send size={18} /> Rejoindre Telegram
               </a>
             </div>
           </div>
@@ -275,7 +275,7 @@ function App() {
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
-            <a href="https://t.me/+74TGsMBlIwwyYTI0" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-sky-600"><Telegram size={16} /> Canal Telegram</a>
+            <a href="https://t.me/+74TGsMBlIwwyYTI0" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-sky-600"><Send size={16} /> Canal Telegram</a>
             <a href="#" className="inline-flex items-center gap-2 text-sm font-medium text-slate-700"><MessageSquareText size={16} /> Service client</a>
           </div>
 
@@ -371,7 +371,7 @@ function HomePage({ setRole, role }: { setRole: (role: Role) => void; role: Role
       <section className="rounded-3xl bg-white p-5 shadow-soft">
         <div className="mb-4 flex items-center justify-between">
           <div className="text-xl font-black">Rejoignez notre Canal Telegram</div>
-          <a href={appSettings.telegramLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2 font-semibold text-white"><Telegram size={16} /> Canal</a>
+          <a href={appSettings.telegramLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2 font-semibold text-white"><Send size={16} /> Rejoindre</a>
         </div>
       </section>
 
@@ -452,7 +452,7 @@ function ProductsPage({ products, search, setSearch }: { products: Product[]; se
           <div key={product.id} className="overflow-hidden rounded-3xl bg-white shadow-soft">
             <img src={product.image} alt={product.name} className="h-44 w-full object-cover" />
             <div className="space-y-3 p-5">
-              <div className="flex items-centers justify-between">
+              <div className="flex items-center justify-between">
                 <div className="text-xl font-black">{product.name}</div>
                 <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">{product.active ? 'Actif' : 'Inactif'}</span>
               </div>
@@ -495,7 +495,7 @@ function DepositPage({ depositForm, setDepositForm, onSubmit }: { depositForm: a
       <form onSubmit={onSubmit} className="space-y-4 rounded-3xl bg-white p-5 shadow-soft">
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-700">Montant</label>
-          <input value={depositForm.amount} onChange={(e) => setDepositForm({ ...depositForm, amount: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Saisissez le montant" />
+          <input value={depositForm.amount} onChange={(e) => setDepositForm({ ...depositForm, amount: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Montant" />
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-700">Réseau</label>
@@ -508,7 +508,7 @@ function DepositPage({ depositForm, setDepositForm, onSubmit }: { depositForm: a
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-700">Numéro de téléphone utilisé pour le paiement</label>
-          <input value={depositForm.paymentNumber} onChange={(e) => setDepositForm({ ...depositForm, paymentNumber: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Ex : Numéro de téléphone sans indicatif" />
+          <input value={depositForm.paymentNumber} onChange={(e) => setDepositForm({ ...depositForm, paymentNumber: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Numéro" />
           <div className="mt-2 text-xs text-slate-500">Indiquez le numéro mobile money utilisé.</div>
         </div>
         <button type="button" className="w-full rounded-xl bg-night px-4 py-3 font-bold text-white">Payer</button>
@@ -525,16 +525,16 @@ function DepositPage({ depositForm, setDepositForm, onSubmit }: { depositForm: a
         <div className="pt-2">
           <div className="text-lg font-black">Confirmation de dépôt</div>
           <div className="mt-4 grid gap-4">
-            <input value={depositForm.amount} onChange={(e) => setDepositForm({ ...depositForm, amount: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Montant déposé" />
+            <input value={depositForm.amount} onChange={(e) => setDepositForm({ ...depositForm, amount: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Montant" />
             <select value={depositForm.network} onChange={(e) => setDepositForm({ ...depositForm, network: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3">
               <option>Orange Money</option>
               <option>Moov Money</option>
               <option>MTN Money</option>
               <option>Wave</option>
             </select>
-            <input value={depositForm.paymentNumber} onChange={(e) => setDepositForm({ ...depositForm, paymentNumber: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Numéro utilisé pour le paiement" />
-            <input value={depositForm.reference} onChange={(e) => setDepositForm({ ...depositForm, reference: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Référence de transaction (facultatif)" />
-            <textarea value={depositForm.proof} onChange={(e) => setDepositForm({ ...depositForm, proof: e.target.value })} className="min-h-[100px] w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Justificatif ou commentaire (facultatif)" />
+            <input value={depositForm.paymentNumber} onChange={(e) => setDepositForm({ ...depositForm, paymentNumber: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Numéro utilisé" />
+            <input value={depositForm.reference} onChange={(e) => setDepositForm({ ...depositForm, reference: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Référence" />
+            <textarea value={depositForm.proof} onChange={(e) => setDepositForm({ ...depositForm, proof: e.target.value })} className="min-h-[100px] w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Preuve de paiement" />
           </div>
           <button type="submit" className="mt-4 w-full rounded-xl bg-success px-4 py-3 font-bold text-white">Envoyer la demande</button>
         </div>
@@ -552,13 +552,13 @@ function WithdrawalPage({ withdrawForm, setWithdrawForm, onSubmit, wallet }: { w
     <div className="space-y-6 pb-24">
       <div className="rounded-3xl bg-white p-5 shadow-soft">
         <div className="text-2xl font-black">Retirer</div>
-        <div className="mt-2 text-sm text-slate-500">Montant minimum demandé : 800 FCFA. Frais : 15 %. Disponibilité : demandes possibles à tout moment, traitement réel selon validation admin.</div>
+        <div className="mt-2 text-sm text-slate-500">Montant minimum demandé : 800 FCFA. Frais : 15 %. Disponibilité : demandes possibles à tout moment, traitement réel selon validation administrative.</div>
       </div>
 
       <form onSubmit={onSubmit} className="space-y-4 rounded-3xl bg-white p-5 shadow-soft">
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-700">Montant</label>
-          <input value={withdrawForm.amount} onChange={(e) => setWithdrawForm({ ...withdrawForm, amount: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Montant à retirer" />
+          <input value={withdrawForm.amount} onChange={(e) => setWithdrawForm({ ...withdrawForm, amount: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Montant" />
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-700">Réseau</label>
@@ -654,7 +654,9 @@ function NotificationsPage({ notifications, setNotifications }: { notifications:
                 <div className="text-base font-bold">{item.title}</div>
                 <div className="mt-1 text-sm text-slate-600">{item.message}</div>
               </div>
-              <span className={`rounded-full px-2 py-1 text-[10px] font-bold uppercase ${item.type === 'success' ? 'bg-green-100 text-green-700' : item.type === 'warning' ? 'bg-amber-100 text-amber-700' : 'bg-sky-100 text-sky-700'}`}>{item.type}</span>
+              <span className={`rounded-full px-2 py-1 text-[10px] font-bold uppercase ${item.type === 'success' ? 'bg-green-100 text-green-700' : item.type === 'warning' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}`}>
+                {item.type}
+              </span>
             </div>
             <div className="mt-2 text-xs text-slate-400">{formatDate(item.createdAt)}</div>
           </div>
@@ -773,23 +775,15 @@ function AdminPage({ deposits, withdrawals, products, setProducts, productEdit, 
           <div className="space-y-3">
             <input value={productEdit.name} onChange={(e) => setProductEdit({ ...productEdit, name: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Nom du produit" />
             <input value={productEdit.amount} onChange={(e) => setProductEdit({ ...productEdit, amount: Number(e.target.value) })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Montant" />
-            <input value={productEdit.dailyYield} onChange={(e) => setProductEdit({ ...productEdit, dailyYield: Number(e.target.value) })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Rendement quotidien" />
-            <input value={productEdit.duration} onChange={(e) => setProductEdit({ ...productEdit, duration: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Durée contractuelle" />
+            <input value={productEdit.dailyYield} onChange={(e) => setProductEdit({ ...productEdit, dailyYield: Number(e.target.value) })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Rendement journalier" />
+            <input value={productEdit.duration} onChange={(e) => setProductEdit({ ...productEdit, duration: e.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Durée" />
             <textarea value={productEdit.conditions} onChange={(e) => setProductEdit({ ...productEdit, conditions: e.target.value })} className="min-h-[100px] w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Conditions" />
-            <button onClick={() => setProducts((current: any[]) => [{ id: `P-${Date.now()}`, ...productEdit, active: true, image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=900&q=80', description: productEdit.description, totalReturn: productEdit.totalReturn }, ...current])} className="w-full rounded-xl bg-energy px-4 py-3 font-bold text-white">Créer / modifier un produit</button>
+            <button onClick={() => setProducts((current: any[]) => [{ id: `P-${Date.now()}`, ...productEdit, active: true, image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=800&q=80' }, ...current])} className="w-full rounded-xl bg-energy px-4 py-3 font-bold text-white">Ajouter un produit</button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-const countryLabels: Record<string, string> = {
-  BJ: 'Bénin',
-  CM: 'Cameroun',
-  CI: 'Côte d’Ivoire',
-  BF: 'Burkina Faso',
-  NE: 'Niger',
-};
 
 export default App;
